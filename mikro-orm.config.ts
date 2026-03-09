@@ -1,0 +1,1 @@
+export { default } from './src/shared/infrastructure/database/mikro-orm.config';

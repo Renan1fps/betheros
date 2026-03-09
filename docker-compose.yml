@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  database:
+    image: postgres:17
+    container_name: betheros-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: betheros
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+    volumes:
+      - ./postgres:/docker-entrypoint-initdb.d
+      - ./data/pg:/data/postgres
