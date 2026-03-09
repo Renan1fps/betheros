@@ -1,3 +1,4 @@
+import 'dotenv/config.js'
 import { defineConfig } from '@mikro-orm/postgresql';
 import { Migrator } from '@mikro-orm/migrations';
 

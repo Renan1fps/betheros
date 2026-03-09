@@ -1,7 +1,11 @@
 import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiQuery } from '@nestjs/swagger';
-import { CreateMatchUseCase, GetMatchUseCase, ListMatchesUseCase } from '../../application/use-cases/match.use-cases';
-import { CreateMatchDto, MatchResponseDto } from './dtos/match.dto';
+import {
+    CreateMatchUseCase,
+    GetMatchUseCase,
+    ListMatchesUseCase
+} from "@modules/matches/application/use-cases/match.use-cases";
+import { CreateMatchDto, MatchResponseDto } from "@modules/matches/infrastructure/http/dtos/match.dto";
 
 @ApiTags('matches')
 @Controller('matches')

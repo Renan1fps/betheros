@@ -1,6 +1,6 @@
 import { IsString, IsUUID, IsDateString, IsOptional, IsEnum, IsInt } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Match, MatchStatus } from '../../domain/entities/match.entity';
+import { Match, MatchStatus} from "@modules/matches/domain/entities/match.entity";
 
 export class CreateMatchDto {
   @ApiPropertyOptional()

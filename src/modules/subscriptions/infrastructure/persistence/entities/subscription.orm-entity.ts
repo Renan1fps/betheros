@@ -1,7 +1,7 @@
 import { Entity, Property, ManyToOne, OneToMany, Collection } from '@mikro-orm/core';
 import { BaseOrmEntity } from '@shared/infrastructure/database/base.orm-entity';
-import { UserOrmEntity } from '../../../../users/infrastructure/persistence/entities/user.orm-entity';
-import { PaymentOrmEntity } from '../../../../payments/infrastructure/persistence/entities/payment.orm-entity';
+import { UserOrmEntity } from '@modules/users/infrastructure/persistence/entities/user.orm-entity';
+import { PaymentOrmEntity } from '@modules/payments/infrastructure/persistence/entities/payment.orm-entity';
 
 @Entity({ tableName: 'subscriptions' })
 export class SubscriptionOrmEntity extends BaseOrmEntity {

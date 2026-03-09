@@ -15,7 +15,7 @@ async function bootstrap() {
   );
 
   const swaggerConfig = new DocumentBuilder()
-    .setTitle('Football API')
+    .setTitle('Betheros API')
     .setDescription('Football statistics and match analysis API')
     .setVersion('1.0')
     .addBearerAuth()

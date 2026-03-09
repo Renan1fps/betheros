@@ -1,7 +1,10 @@
 import { Entity, Property, OneToMany, Collection } from '@mikro-orm/core';
 import { BaseOrmEntity } from '@shared/infrastructure/database/base.orm-entity';
 import { UserAuthProviderOrmEntity } from './user-auth-provider.orm-entity';
-import { SubscriptionOrmEntity } from '../../../subscriptions/infrastructure/persistence/entities/subscription.orm-entity';
+import {
+    SubscriptionOrmEntity
+} from "@modules/subscriptions/infrastructure/persistence/entities/subscription.orm-entity";
+
 
 @Entity({ tableName: 'users' })
 export class UserOrmEntity extends BaseOrmEntity {

@@ -1,5 +1,6 @@
 import { IsEmail, IsString, MinLength } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { User } from "@modules/users/domain/entities/user.entity";
 
 export class CreateUserDto {
   @ApiProperty({ example: 'user@example.com' })
@@ -25,7 +26,7 @@ export class UserResponseDto {
   @ApiProperty()
   updatedAt: Date;
 
-  static fromDomain(user: import('../../domain/entities/user.entity').User): UserResponseDto {
+  static fromDomain(user: User): UserResponseDto {
     const dto = new UserResponseDto();
     dto.id = user.id;
     dto.email = user.email;

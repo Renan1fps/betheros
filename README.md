@@ -68,14 +68,13 @@ cp .env.example .env
 npm install
 ```
 
-### 3. Criar o banco
+### 3. Subir o banco de dados localmente o banco
 ```sql
-CREATE DATABASE football_db;
+docker compose -f docker-compose.yml up -d
 ```
 
 ### 4. Rodar migrations
 ```bash
-npm run migration:create -- --name=InitialMigration
 npm run migration:up
 ```
 
