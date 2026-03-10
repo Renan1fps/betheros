@@ -70,20 +70,17 @@ npm install
 
 ### 3. Subir o banco de dados localmente o banco
 ```sql
-docker compose -f docker-compose.yml up -d
+docker compose -f docker-compose.yml up --build 
 ```
+- No seu terminal irá aparecer a mensagem: ` Ready! You are using Stripe API Version [2020-08-27]. Your webhook signing secret is whsec_xxxx` 
+copie a secret e cole nas suas envs
 
 ### 4. Rodar migrations
 ```bash
 npm run migration:up
 ```
 
-### 5. Iniciar
-```bash
-npm run start:dev
-```
-
-### 6. Swagger
+### 5. Swagger
 Acesse: `http://localhost:3000/api/docs`
 
 ---
@@ -95,3 +92,15 @@ Acesse: `http://localhost:3000/api/docs`
 - **Mapper pattern**: separação completa entre ORM entity e domain entity
 - **Use Cases únicos por responsabilidade**: `CreateUserUseCase`, `GetUserUseCase`, etc.
 - **Portas tipadas**: interfaces com contratos explícitos para todos os repositórios
+
+
+## Dados de teste para o checkout stripe
+- Cartão
+  - Pagamento aprovado 4242 4242 4242 4242
+  - Requer autenticação (3DS) 4000 0025 0000 
+  - Pagamento recusado4000 0000 0000 9995
+___
+- MM/AA: qualquer data futura, ex: 12/26
+- CVC: qualquer 3 dígitos, ex: 123
+- Nome: qualquer nome
+- País: Brasil já está selecionado

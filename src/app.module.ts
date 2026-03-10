@@ -9,6 +9,8 @@ import { MatchStatisticsModule } from '@modules/match-statistics/match-statistic
 import { MatchAnalysesModule } from '@modules/match-analyses/match-analyses.module';
 import { MatchTipsModule } from '@modules/match-tips/match-tips.module';
 import mikroOrmConfig from './shared/infrastructure/database/mikro-orm.config';
+import { AuthModule } from "@modules/auth/auth.module";
+import { StripeModule } from "@modules/stripe/stripe.module";
 
 @Module({
   imports: [
@@ -21,6 +23,8 @@ import mikroOrmConfig from './shared/infrastructure/database/mikro-orm.config';
     MatchStatisticsModule,
     MatchAnalysesModule,
     MatchTipsModule,
+    StripeModule,
+    AuthModule
   ],
 })
 export class AppModule {}
