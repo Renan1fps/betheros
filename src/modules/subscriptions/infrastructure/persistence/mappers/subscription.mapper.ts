@@ -11,6 +11,8 @@ export class SubscriptionMapper {
       startedAt: orm.startedAt,
       expiresAt: orm.expiresAt,
       createdAt: orm.createdAt,
+      externalSubscriptionId: orm.externalSubscriptionId,
+      gateway: orm.gateway,
     });
   }
 
@@ -23,6 +25,8 @@ export class SubscriptionMapper {
     orm.startedAt = domain.startedAt;
     orm.expiresAt = domain.expiresAt;
     orm.createdAt = domain.createdAt;
+    orm.externalSubscriptionId = domain.externalSubscriptionId;
+    orm.gateway = domain.gateway;
     return orm;
   }
 }

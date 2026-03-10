@@ -11,6 +11,8 @@ export interface SubscriptionProps {
   startedAt: Date;
   expiresAt: Date;
   createdAt?: Date;
+  externalSubscriptionId: string;
+  gateway: string;
 }
 
 export class Subscription extends BaseEntity {
@@ -20,8 +22,10 @@ export class Subscription extends BaseEntity {
   readonly startedAt: Date;
   readonly expiresAt: Date;
   readonly createdAt: Date;
+  readonly externalSubscriptionId: string;
+  readonly gateway: string;
 
-  constructor(props: SubscriptionProps) {
+    constructor(props: SubscriptionProps) {
     super(props.id);
     this.userId = props.userId;
     this.status = props.status;
@@ -29,6 +33,8 @@ export class Subscription extends BaseEntity {
     this.startedAt = props.startedAt;
     this.expiresAt = props.expiresAt;
     this.createdAt = props.createdAt ?? new Date();
+    this.externalSubscriptionId = props.externalSubscriptionId;
+    this.gateway = props.gateway;
   }
 
   isActive(): boolean {
@@ -37,6 +43,10 @@ export class Subscription extends BaseEntity {
 
   cancel(): Subscription {
     return new Subscription({ ...this.toProps(), status: 'cancelled' });
+  }
+
+  updateFromStripe({ status, expiresAt }: { status: SubscriptionStatus, expiresAt: Date }): Subscription {
+    return new Subscription({ ...this.toProps(), status, expiresAt });
   }
 
   private toProps(): SubscriptionProps {
@@ -48,6 +58,8 @@ export class Subscription extends BaseEntity {
       startedAt: this.startedAt,
       expiresAt: this.expiresAt,
       createdAt: this.createdAt,
+      externalSubscriptionId: this.externalSubscriptionId,
+      gateway: this.gateway,
     };
   }
 

@@ -28,6 +28,8 @@ export class CreateSubscriptionUseCase {
       plan: input.plan,
       startedAt: input.startedAt,
       expiresAt: input.expiresAt,
+      externalSubscriptionId: '',
+      gateway: 'teste'
     });
 
     return this.subscriptionRepository.save(subscription);
