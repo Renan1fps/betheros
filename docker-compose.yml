@@ -13,3 +13,21 @@ services:
     volumes:
       - ./postgres:/docker-entrypoint-initdb.d
       - ./data/pg:/data/postgres
+
+  app:
+    build: .
+    container_name: betheros-app
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    depends_on:
+      - database
+
+  stripe-cli:
+    image: stripe/stripe-cli:latest
+    command: listen --api-key ${STRIPE_SECRET_KEY} --forward-to http://app:3000/stripe/webhook
+    env_file:
+      - .env
+    depends_on:
+      - app
