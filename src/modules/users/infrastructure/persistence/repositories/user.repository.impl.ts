@@ -26,7 +26,7 @@ export class UserRepository implements IUserRepository {
 
   async save(user: User): Promise<User> {
     const orm = UserMapper.toOrm(user);
-    await this.em.persistAndFlush(orm);
+    await this.em.persist(orm).flush();
     return UserMapper.toDomain(orm);
   }
 

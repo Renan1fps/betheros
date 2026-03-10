@@ -7,12 +7,17 @@ import { USER_REPOSITORY } from './domain/repositories/user.repository';
 import { CreateUserUseCase } from './application/use-cases/create-user.use-case';
 import { GetUserUseCase } from './application/use-cases/get-user.use-case';
 import { UserController } from './infrastructure/http/controllers/user.controller';
+import {USER_AUTH_PROVIDER_REPOSITORY} from "@modules/users/domain/repositories/user-auth-provider.repository";
+import {
+    UserAuthProviderRepository
+} from "@modules/users/infrastructure/persistence/repositories/user-auth-provider.repository.impl";
 
 @Module({
   imports: [MikroOrmModule.forFeature([UserOrmEntity, UserAuthProviderOrmEntity])],
   controllers: [UserController],
   providers: [
     { provide: USER_REPOSITORY, useClass: UserRepository },
+    { provide: USER_AUTH_PROVIDER_REPOSITORY, useClass: UserAuthProviderRepository },
     CreateUserUseCase,
     GetUserUseCase,
   ],

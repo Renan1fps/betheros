@@ -1,4 +1,4 @@
-import { IsEmail, IsString, MinLength } from 'class-validator';
+import {IsEmail, IsOptional, IsString, MinLength} from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { User } from "@modules/users/domain/entities/user.entity";
 
@@ -11,6 +11,15 @@ export class CreateUserDto {
   @IsString()
   @MinLength(8)
   password: string;
+
+  @ApiProperty({ example: 'google' })
+  @IsString()
+  provider: string;
+
+  @ApiProperty({ example: '82f4e05f-850b-46bd-9f56-0a08db3ea837' })
+  @IsString()
+  @IsOptional()
+  providerUserId?: string;
 }
 
 export class UserResponseDto {
