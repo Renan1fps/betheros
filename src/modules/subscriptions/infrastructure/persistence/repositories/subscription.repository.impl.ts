@@ -9,6 +9,11 @@ import { SubscriptionMapper } from '../mappers/subscription.mapper';
 export class SubscriptionRepository implements ISubscriptionRepository {
   constructor(private readonly em: EntityManager) {}
 
+  async findByExternalSubscriptionId(id: string): Promise<Subscription | null> {
+      const orm = await this.em.findOne(SubscriptionOrmEntity, { externalSubscriptionId: id }, { populate: ['user'] });
+      return orm ? SubscriptionMapper.toDomain(orm) : null;
+  }
+
   async findById(id: string): Promise<Subscription | null> {
     const orm = await this.em.findOne(SubscriptionOrmEntity, { id }, { populate: ['user'] });
     return orm ? SubscriptionMapper.toDomain(orm) : null;
