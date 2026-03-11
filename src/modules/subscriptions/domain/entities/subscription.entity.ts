@@ -11,8 +11,7 @@ export interface SubscriptionProps {
   startedAt: Date;
   expiresAt: Date;
   createdAt?: Date;
-  externalSubscriptionId: string;
-  gateway: string;
+  providerSubscriptionId: string;
 }
 
 export class Subscription extends BaseEntity {
@@ -22,8 +21,7 @@ export class Subscription extends BaseEntity {
   readonly startedAt: Date;
   readonly expiresAt: Date;
   readonly createdAt: Date;
-  readonly externalSubscriptionId: string;
-  readonly gateway: string;
+  readonly providerSubscriptionId: string;
 
     constructor(props: SubscriptionProps) {
     super(props.id);
@@ -33,9 +31,8 @@ export class Subscription extends BaseEntity {
     this.startedAt = props.startedAt;
     this.expiresAt = props.expiresAt;
     this.createdAt = props.createdAt ?? new Date();
-    this.externalSubscriptionId = props.externalSubscriptionId;
-    this.gateway = props.gateway;
-  }
+    this.providerSubscriptionId = props.providerSubscriptionId;
+    }
 
   isActive(): boolean {
     return this.status === 'active' && this.expiresAt > new Date();
@@ -58,8 +55,7 @@ export class Subscription extends BaseEntity {
       startedAt: this.startedAt,
       expiresAt: this.expiresAt,
       createdAt: this.createdAt,
-      externalSubscriptionId: this.externalSubscriptionId,
-      gateway: this.gateway,
+      providerSubscriptionId: this.providerSubscriptionId,
     };
   }
 
