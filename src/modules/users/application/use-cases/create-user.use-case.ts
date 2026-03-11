@@ -1,5 +1,5 @@
 import { Inject, Injectable, ConflictException } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import { User } from '../../domain/entities/user.entity';
 import { IUserRepository, USER_REPOSITORY } from '../../domain/repositories/user.repository';
 import { UserAuthProvider } from "@modules/users/domain/entities/user-auth-provider.entity";
