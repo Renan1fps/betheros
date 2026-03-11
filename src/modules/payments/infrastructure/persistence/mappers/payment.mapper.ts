@@ -5,7 +5,7 @@ export class PaymentMapper {
   static toDomain(orm: PaymentOrmEntity): Payment {
     return new Payment({
       id: orm.id,
-      subscriptionId: orm.subscription.id,
+      subscriptionId: orm.subscription?.id,
       gateway: orm.gateway,
       externalPaymentId: orm.externalPaymentId,
       amount: Number(orm.amount),

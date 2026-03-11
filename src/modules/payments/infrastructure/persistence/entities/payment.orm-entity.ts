@@ -4,8 +4,8 @@ import { SubscriptionOrmEntity } from '@modules/subscriptions/infrastructure/per
 
 @Entity({ tableName: 'payments' })
 export class PaymentOrmEntity extends BaseOrmEntity {
-  @ManyToOne(() => SubscriptionOrmEntity, { fieldName: 'subscription_id' })
-  subscription!: SubscriptionOrmEntity;
+  @ManyToOne(() => SubscriptionOrmEntity, { fieldName: 'subscription_id', nullable: true })
+  subscription?: SubscriptionOrmEntity;
 
   @Property()
   gateway!: string;
