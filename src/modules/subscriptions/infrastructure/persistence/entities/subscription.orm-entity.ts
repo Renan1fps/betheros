@@ -11,14 +11,11 @@ export class SubscriptionOrmEntity extends BaseOrmEntity {
   @Property()
   status!: string;
 
+  @Property({ fieldName: 'provider_subscription_id' })
+  providerSubscriptionId!: string;
+
   @Property()
   plan!: string;
-
-  @Property()
-  externalSubscriptionId!: string;
-
-  @Property()
-  gateway: string;
 
   @Property({ fieldName: 'started_at' })
   startedAt!: Date;
