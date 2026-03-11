@@ -11,7 +11,8 @@ export default defineConfig({
   schema: process.env.DB_SCHEMA ?? 'public',
   entities: ['dist/**/*.orm-entity.js'],
   entitiesTs: ['src/**/*.orm-entity.ts'],
-  debug: process.env.NODE_ENV === 'development',
+  debug: true,
+  logger: (message) => console.log(message),
   extensions: [Migrator],
   migrations: {
     path: 'dist/shared/infrastructure/database/migrations',

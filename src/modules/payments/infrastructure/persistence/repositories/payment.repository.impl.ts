@@ -14,9 +14,9 @@ export class PaymentRepository implements IPaymentRepository {
     return orm ? PaymentMapper.toDomain(orm) : null;
   }
 
-  async findBySubscriptionId(subscriptionId: string): Promise<Payment[]> {
-    const orms = await this.em.find(PaymentOrmEntity, { subscription: { id: subscriptionId } }, { populate: ['subscription'] });
-    return orms.map(PaymentMapper.toDomain);
+  async findBySubscriptionId(subscriptionId: string):  Promise<Payment | null> {
+    const orm = await this.em.findOne(PaymentOrmEntity, { subscription: { id: subscriptionId } }, { populate: ['subscription'] });
+    return orm ? PaymentMapper.toDomain(orm) : null;
   }
 
   async findByExternalPaymentId(externalPaymentId: string): Promise<Payment | null> {

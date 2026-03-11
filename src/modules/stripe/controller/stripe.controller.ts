@@ -1,6 +1,6 @@
 import {
-    Controller, Post, Get, Body, Headers,
-    Req, RawBodyRequest, Res, Request, UseGuards,
+    Controller, Post, Headers,
+    Req, RawBodyRequest, Res, Request, UseGuards, ConflictException,
 } from '@nestjs/common';
 import { Response } from 'express';
 import { StripeService } from "@modules/stripe/services/stripe.service";
@@ -47,6 +47,9 @@ export class StripeController {
             await this.stripeWebhookUseCase.execute(event);
             return res.sendStatus(200);
         } catch (err) {
+            if(err instanceof ConflictException) {
+                return res.sendStatus(200);
+            }
             return res.status(400).send(`Webhook Error: ${err.message}`);
         }
     }

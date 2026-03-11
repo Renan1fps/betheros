@@ -4,7 +4,7 @@ export type PaymentStatus = 'pending' | 'completed' | 'failed' | 'refunded';
 
 export interface PaymentProps {
   id?: string;
-  subscriptionId: string;
+  subscriptionId?: string;
   gateway: string;
   externalPaymentId: string;
   amount: number;
@@ -15,7 +15,7 @@ export interface PaymentProps {
 }
 
 export class Payment extends BaseEntity {
-  readonly subscriptionId: string;
+  readonly subscriptionId?: string;
   readonly gateway: string;
   readonly externalPaymentId: string;
   readonly amount: number;

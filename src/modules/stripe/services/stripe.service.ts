@@ -47,4 +47,13 @@ export class StripeService {
             process.env.STRIPE_WEBHOOK_SECRET!,
         );
     }
+
+    async getInvoiceBySubscriptionId(subscriptionId: string): Promise<string> {
+        const invoice = await this.stripe.invoices.list({
+            subscription: subscriptionId,
+            limit: 1,
+        })
+        return invoice.data[0]?.id ?? subscriptionId;
+
+    }
 }
