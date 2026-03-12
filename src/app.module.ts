@@ -11,6 +11,7 @@ import { MatchTipsModule } from '@modules/match-tips/match-tips.module';
 import mikroOrmConfig from './shared/infrastructure/database/mikro-orm.config';
 import { AuthModule } from "@modules/auth/auth.module";
 import { StripeModule } from "@modules/stripe/stripe.module";
+import { HealthCheckController } from "@shared/infrastructure/http/health-check.controller";
 
 @Module({
   imports: [
@@ -26,5 +27,6 @@ import { StripeModule } from "@modules/stripe/stripe.module";
     StripeModule,
     AuthModule
   ],
+  controllers: [HealthCheckController],
 })
 export class AppModule {}
