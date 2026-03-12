@@ -9,7 +9,7 @@
     "start:prod": "node dist/src/main",
     "mikro-orm": "mikro-orm",
     "migration:create": "dotenv -e .env.local -- mikro-orm migration:create --name=$npm_config_name",
-    "migration:up": "dotenv -e .env.local -- mikro-orm migration:up",
+    "migration:up": "mikro-orm migration:up",
     "migration:down": "dotenv -e .env.local -- mikro-orm migration:down"
   },
   "dependencies": {
