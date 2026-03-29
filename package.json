@@ -10,7 +10,8 @@
     "mikro-orm": "mikro-orm",
     "migration:create": "dotenv -e .env.local -- mikro-orm migration:create --name=$npm_config_name",
     "migration:up": "mikro-orm migration:up",
-    "migration:down": "dotenv -e .env.local -- mikro-orm migration:down"
+    "migration:down": "dotenv -e .env.local -- mikro-orm migration:down",
+    "review": "node scripts/review.js"
   },
   "dependencies": {
     "@mikro-orm/cli": "^6.3.0",
@@ -47,7 +48,11 @@
     "@types/uuid": "^9.0.7",
     "dotenv-cli": "^11.0.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "@anthropic-ai/sdk": "^0.39.0",
+    "@google/generative-ai": "^0.21.0",
+    "@octokit/rest": "^21.0.2",
+    "openai": "^4.77.0"
   },
   "mikro-orm": {
     "configPaths": [

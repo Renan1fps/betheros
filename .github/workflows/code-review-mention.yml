@@ -1,0 +1,50 @@
+name: AI Code Review on Mention
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  review:
+    if: |
+      github.event.issue.pull_request != null &&
+      contains(github.event.comment.body, '@codeReviewer')
+
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      issues: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run AI Code Review
+        env:
+          # ─── Provider ──────────────────────────────────────────────
+          # Opções: anthropic | openai | gemini
+          LLM_PROVIDER: ${{ vars.LLM_PROVIDER || 'anthropic' }}
+
+          # ─── Modelo (opcional, usa o padrão do provider se vazio) ──
+          LLM_MODEL: ${{ vars.LLM_MODEL }}
+
+          # ─── API Keys ──────────────────────────────────────────────
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+
+          # ─── GitHub ────────────────────────────────────────────────
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.issue.number }}
+          REPO: ${{ github.repository }}
+          COMMENT_BODY: ${{ github.event.comment.body }}
+
+        run: node scripts/review.js
