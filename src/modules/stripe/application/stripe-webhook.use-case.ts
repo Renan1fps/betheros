@@ -6,8 +6,8 @@ import {
 } from '../../subscriptions/domain/repositories/subscription.repository';
 import { CreateSubscriptionUseCase } from "@modules/subscriptions/application/use-cases/create-subscription.use-case";
 import { IPaymentRepository, PAYMENT_REPOSITORY } from "@modules/payments/domain/repositories/payment.repository";
-import { Payment } from "@modules/payments/domain/entities/payment.entity";
-import {StripeService} from "@modules/stripe/services/stripe.service";
+import { StripeService } from "@modules/stripe/services/stripe.service";
+import { CreateRecurringPaymentUseCase } from "@modules/payments/application/use-cases/create-recurring-payment.use-case";
 
 interface StripeInvoiceExtended extends Stripe.InvoicePayment {
     subscription?: string;
@@ -29,6 +29,7 @@ export class StripeWebhookUseCase {
         private readonly paymentRepository: IPaymentRepository,
         private readonly createSubscriptionUseCase: CreateSubscriptionUseCase,
         private readonly stripeService: StripeService,
+        private readonly createRecurringPaymentUseCase: CreateRecurringPaymentUseCase
     ) {}
 
     async execute(event: Stripe.Event): Promise<void> {
@@ -50,25 +51,21 @@ export class StripeWebhookUseCase {
 
             case 'invoice.payment_succeeded': {
                 const invoice = event.data.object as unknown as StripeInvoiceExtended;
+
                 if (invoice.billing_reason === 'subscription_create') break;
+
                 const stripeSubscriptionId = invoice.subscription;
                 const userId = invoice.parent?.subscription_details?.metadata?.userId;
+
                 if (!stripeSubscriptionId || !userId) break;
-                const subscription = await this.subscriptionRepository.findByProviderSubscriptionId(stripeSubscriptionId);
-                if (!subscription) break;
-                const firstPayment = await this.paymentRepository.findBySubscriptionId(subscription.id);
-                if (!firstPayment || !firstPayment.subscriptionId) break;
-                await this.paymentRepository.save(
-                    Payment.create({
-                        status: 'completed',
-                        gateway: 'stripe',
-                        subscriptionId: firstPayment.subscriptionId,
-                        amount: invoice.amount_paid / 100,
-                        currency: invoice.currency.toUpperCase(),
-                        externalPaymentId: invoice.id,
-                        paidAt: new Date(),
-                    }),
-                );
+
+                await this.createRecurringPaymentUseCase.execute({
+                    stripeSubscriptionId,
+                    userId,
+                    amountPaid: invoice.amount_paid,
+                    currency: invoice.currency,
+                    externalPaymentId: invoice.id,
+                });
                 break;
             }
 
