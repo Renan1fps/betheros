@@ -19,9 +19,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_PAT }}
 
-      - uses: renan1fps/ai-code-reviewer@v1
+      - uses: Renan1fps/ai-code-reviewer@v1
         with:
           llm_provider:  ${{ vars.LLM_PROVIDER || 'anthropic' }}
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
