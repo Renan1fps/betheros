@@ -21,10 +21,10 @@ jobs:
         with:
           token: ${{ secrets.GH_PAT }}
 
-      - uses: Renan1fps/ai-code-reviewer@v2
+      - uses: Renan1fps/ai-code-reviewer@v3
         with:
           llm_provider:  ${{ vars.LLM_PROVIDER || 'anthropic' }}
-          pr_number: ${{ github.event.issue.number }}
+          pr_number: ${{ github.event.pull_request.number }}
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
           style_guide_path: './docs/style-guide.md'
           skills_path: './docs/skills'
