@@ -21,7 +21,7 @@ jobs:
         with:
           token: ${{ secrets.GH_PAT }}
 
-      - uses: Renan1fps/ai-code-reviewer@v1
+      - uses: Renan1fps/ai-code-reviewer@v2
         with:
           llm_provider:  ${{ vars.LLM_PROVIDER || 'anthropic' }}
           pr_number: ${{ github.event.issue.number }}
