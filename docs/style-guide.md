@@ -1,9 +1,6 @@
 # Style Guide do Projeto
 
-> Edite este arquivo com as regras específicas do seu projeto.
-> O AI Code Reviewer usará estas regras em todas as revisões.
-
----
+--- mpr-zpia-ypt
 
 ## JavaScript / TypeScript
 
@@ -47,5 +44,3 @@
 - Evite mocks excessivos — prefira testes de integração onde possível
 
 ---
-
-> Adicione ou remova regras conforme a necessidade do seu projeto.
