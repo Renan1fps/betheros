@@ -24,6 +24,7 @@ jobs:
       - uses: Renan1fps/ai-code-reviewer@v1
         with:
           llm_provider:  ${{ vars.LLM_PROVIDER || 'anthropic' }}
+          pr_number: ${{ github.event.issue.number }}
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
           style_guide_path: './docs/style-guide.md'
           skills_path: './docs/skills'
